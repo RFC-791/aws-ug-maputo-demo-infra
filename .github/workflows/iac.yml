@@ -36,7 +36,7 @@ jobs:
         run: |
           terraform init \
             -backend-config="bucket=${{ secrets.TF_STATE_BUCKET }}" \
-            -backend-config="key=${{ github.repo.name }}.tfstate" \
+            -backend-config="key=${{ GITHUB_REPOSITORY }}.tfstate" \
             -backend-config="region=af-south-1" \
             -input=false
         working-directory: iac
@@ -92,7 +92,7 @@ jobs:
         run: |
           terraform init \
             -backend-config="bucket=${{ secrets.TF_STATE_BUCKET }}" \
-            -backend-config="key=${{ github.repo.name }}.tfstate" \
+            -backend-config="key=${{ GITHUB_REPOSITORY }}.tfstate" \
             -backend-config="region=af-south-1" \
             -input=false
         working-directory: iac
