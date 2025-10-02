@@ -45,7 +45,7 @@ data "aws_iam_policy_document" "log_policy" {
 
 resource "aws_iam_role_policy" "flow_logs_role_policy" {
   name   = "aws-ug-maputo-flow-logs-role-policy"
-  role   = aws_iam_role.example.id
+  role   = aws_iam_role.flow_logs.id
   policy = data.aws_iam_policy_document.log_policy.json
 }
 
