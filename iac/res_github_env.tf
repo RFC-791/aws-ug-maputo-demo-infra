@@ -1,5 +1,5 @@
 data "github_organization" "org" {
-  full_name = "RFC-791"
+  name = "RFC-791"
 }
 
 resource "github_actions_organization_variable" "ecs_cluster_name" {
