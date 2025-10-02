@@ -1,7 +1,7 @@
 resource "aws_vpc" "pvt" {
   cidr_block = "10.0.0.0/16"
   tags = {
-    Name = "Private VPC"
+    Name = "${local.prefix} - Private VPC"
   }
 }
 
@@ -38,7 +38,7 @@ resource "aws_main_route_table_association" "main" {
 
 resource "aws_subnet" "pvt1a" {
   vpc_id                  = aws_vpc.pvt.id
-  cidr_block              = "10.0.1.0/24"
+  cidr_block              = "10.0.10.0/24"
   map_public_ip_on_launch = false
   availability_zone       = "af-south-1a"
 
@@ -49,7 +49,7 @@ resource "aws_subnet" "pvt1a" {
 
 resource "aws_subnet" "pvt1b" {
   vpc_id                  = aws_vpc.pvt.id
-  cidr_block              = "10.0.1.0/24"
+  cidr_block              = "10.0.11.0/24"
   map_public_ip_on_launch = false
   availability_zone       = "af-south-1b"
 
@@ -71,7 +71,7 @@ resource "aws_subnet" "pub1a" {
 
 resource "aws_subnet" "pub1b" {
   vpc_id                  = aws_vpc.pvt.id
-  cidr_block              = "10.0.20.0/24"
+  cidr_block              = "10.0.21.0/24"
   map_public_ip_on_launch = true
   availability_zone       = "af-south-1b"
 
