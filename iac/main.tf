@@ -4,11 +4,6 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 6.0"
     }
-
-    github = {
-      source  = "integrations/github"
-      version = "~> 6.0"
-    }
   }
 
   backend "s3" {}
@@ -19,6 +14,3 @@ provider "aws" {
   default_tags { tags = local.common_tags }
 }
 
-provider "github" {
-  token = var.github_org_token
-}    
