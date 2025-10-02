@@ -25,7 +25,7 @@ resource "aws_lb_listener" "ingress" {
 }
 
 resource "aws_security_group" "lb_sg" {
-  name        = "${aws_lb.ingress.name}-sg"
+  name        = "${local.prefix}-lb-sg"
   description = "Ingress security group"
   vpc_id      = aws_vpc.pvt.id
 
