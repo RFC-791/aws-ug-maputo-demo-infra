@@ -1,6 +1,6 @@
 resource "aws_flow_log" "flow_logs" {
   iam_role_arn    = aws_iam_role.flow_logs.arn
-  log_destination = aws_cloudwatch_log_group.log.arn
+  log_destination = aws_cloudwatch_log_group.logs.arn
   traffic_type    = "ALL"
   vpc_id          = aws_vpc.pvt.id
 }
