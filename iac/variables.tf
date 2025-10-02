@@ -3,7 +3,7 @@ variable "git_repo" {
   type        = string
 }
 
-variable "github_org_token {
+variable "github_org_token" {
   description = "GitHub Org Token"
   type        = string
 }
