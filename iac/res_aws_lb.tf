@@ -26,8 +26,9 @@ resource "aws_lb_listener" "ingress" {
 
 resource "aws_security_group" "lb_sg" {
   name        = "${aws_lb.ingress.name}-sg"
-  description = "${aws_lb.name} security group"
+  description = "Ingress security group"
   vpc_id      = aws_vpc.pvt.id
+
 }
 
 resource "aws_vpc_security_group_ingress_rule" "allow_tls_ipv4" {
