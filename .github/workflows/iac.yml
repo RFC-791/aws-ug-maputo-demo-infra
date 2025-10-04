@@ -104,7 +104,7 @@ jobs:
   terraform-destroy:
     name: "Terraform destroy"
     runs-on: ubuntu-latest
-    if: ${{ vars.TF_DESTROY }}
+    if: ${{ vars.TF_DESTROY == 'true' }}
     needs: terraform-apply
     steps:
       - name: Checkout code
