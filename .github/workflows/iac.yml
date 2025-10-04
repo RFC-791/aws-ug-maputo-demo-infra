@@ -65,7 +65,7 @@ jobs:
   terraform-apply:
     name: "Terraform Apply"
     runs-on: ubuntu-latest
-    if: ${{ !vars.TF_DESTROY }} && (github.ref == 'refs/heads/main' || github.event.inputs.target_branch == 'main')
+    if: ${{ vars.TF_DESTROY != 'destroy' }} && (github.ref == 'refs/heads/main' || github.event.inputs.target_branch == 'main')
     needs: terraform-plan
     steps:
       - name: Check TF_DESTROY
@@ -107,7 +107,7 @@ jobs:
   terraform-destroy:
     name: "Terraform destroy"
     runs-on: ubuntu-latest
-    if: ${{ vars.TF_DESTROY }}
+    if: ${{ vars.TF_DESTROY == 'destroy' }}
     needs: terraform-plan
     steps:
       - name: Checkout code
