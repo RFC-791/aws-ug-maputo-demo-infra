@@ -104,8 +104,8 @@ jobs:
   terraform-destroy:
     name: "Terraform destroy"
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.target_branch == 'main'
-    needs: terraform-plan
+    if: github.event_name == 'workflow_dispatch'
+    needs: terraform-apply
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
