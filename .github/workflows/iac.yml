@@ -65,7 +65,7 @@ jobs:
   terraform-apply:
     name: "Terraform Apply"
     runs-on: ubuntu-latest
-    if: ${{ vars.TF_DESTROY != 'destroy' }} && (github.ref == 'refs/heads/main' || github.event.inputs.target_branch == 'main')
+    if: github.ref == 'refs/heads/main' || github.event.inputs.target_branch == 'main'
     needs: terraform-plan
     steps:
       - name: Check TF_DESTROY
@@ -73,23 +73,27 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v4
+        if: ${{ vars.TF_DESTROY != 'destroy' }}
 
       - name: Download Terraform Plan Artifact
         uses: actions/download-artifact@v4
         with:
           name: terraform-plan
           path: iac
+        if: ${{ vars.TF_DESTROY != 'destroy' }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.12.2
+        if: ${{ vars.TF_DESTROY != 'destroy' }}
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: af-south-1
           role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+        if: ${{ vars.TF_DESTROY != 'destroy' }}
 
       - name: Terraform Init
         run: |
@@ -99,10 +103,12 @@ jobs:
             -backend-config="region=af-south-1" \
             -input=false
         working-directory: iac
+        if: ${{ vars.TF_DESTROY != 'destroy' }}
 
       - name: Terraform Apply
         run: terraform apply -auto-approve plan.out
         working-directory: iac
+        if: ${{ vars.TF_DESTROY != 'destroy' }}
 
   terraform-destroy:
     name: "Terraform destroy"
